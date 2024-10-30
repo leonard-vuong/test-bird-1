@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Manrope:700|Manrope:400');
+
+:root {
+  --text: hsl(0, 0%, 99%);
+  --textDim: hsl(0, 0%, 60%);
+  --background: hsl(0, 0%, 7%);
+  --primary: hsl(155, 100%, 65%);
+  --primaryBg: hsla(155, 100%, 65%, 1%);
+  --primaryHi: hsla(155, 100%, 75%, 25%);
+  --primaryFg: hsl(155, 100%, 85%);
+  --secondary: hsl(156, 51%, 14%);
+  --secondaryFg: hsl(156, 51%, 75%);
+  --secondaryBg: hsla(156, 51%, 14%, 5%);
+  --secondaryHi: hsla(156, 51%, 30%, 50%);
+  --accent: hsl(155, 100%, 94%);
+  --accentBg: hsla(155, 100%, 94%, 1%);
+  --accentHi: hsla(155, 100%, 100%, 25%);
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--background);
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+}
+
+.quiz-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--text);
+}
+
+#question {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choices {
+    padding: 12px;
+    background: var(--primaryBg);
+    color: var(--primaryFg);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.choices:hover {
+    background-color: var(--primaryHi);
+    transform: translateY(-3px);
+}
+
+#done-button {
+    padding: 12px;
+    background-color: var(--secondary);
+    color: var(--secondaryFg);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#done-button:hover {
+    background-color: var(--secondaryHi);
+}
+
+#result-container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    color: var(--text);
+}
+
+#result img {
+    max-width: 45%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#download-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: var(--text);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#download-btn:hover {
+    background-color: var(--primaryHi);
+}
