@@ -13,13 +13,24 @@
         <!-- Language selection before the quiz starts -->
         <div id="language-selection">
             <p>Do you prefer to take the journey in English or Vietnamese? - Bạn muốn bắt đầu hành trình bằng tiếng Việt hay tiếng Anh?</p>
-            <button class="language-button" data-language="english">English</button>
-            <button class="language-button" data-language="vietnamese">Vietnamese</button>
+            <button class="language-button choices" data-language="english">English</button>
+            <button class="language-button choices" data-language="vietnamese">Vietnamese</button>
+            <button id="next-button" style="display:none;">Next / Tiếp</button>
         </div>
 
-        <!-- Question container where questions will be displayed -->
+        <!-- Question container with counter -->
         <div id="question-container" style="display:none;">
-            <p id="question"></p>
+            <div class="question-box">
+                <div class="qNum">
+                    <div class="qNum-pages">
+                        <div id="q-current" class="qpn">Q1</div>
+                        <div class="qpbar"></div>
+                        <div class="qpn q-total">/14</div>
+                    </div>
+                </div>
+                <div id="question" class="question ps-txt">Question will appear here.</div>
+            </div>
+            <img id="question-image" src="q1_illustration.jpg" alt="Question image" style="margin: 50px auto;">
             <div id="choices"></div>
             <button id="done-button" style="display: none;">Done</button>
         </div>
@@ -35,9 +46,18 @@
     <!-- Result container where the result will be shown -->
     <div id="result-container" style="display: none;">
         <h2>Your Results</h2>
-        <div id="result"></div> <!-- Placeholder for result images and download links -->
+        <div id="result">
+            <div class="result-image-container">
+                <img id="bird-persona" alt="Bird Persona">
+                <a id="persona-download" download style="display:block;">Download Persona</a>
+            </div>
+            <div class="result-image-container">
+                <img id="bird-match" alt="Bird Match">
+                <a id="match-download" download style="display:block;">Download Match</a>
+            </div>
+        </div>
     </div>
 
-    <script src="quiz.js"></script> <!-- Link to the JavaScript file -->
+    <script src="quiz.js"></script>
 </body>
 </html>
