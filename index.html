@@ -53,19 +53,42 @@
     </div>
 
     <!-- Result container where the result will be shown -->
-    <div id="result-container" style="display: none;">
-        <h2>Your Results</h2>
-        <div id="result">
-            <div class="result-image-container">
-                <img id="bird-persona" alt="Bird Persona">
-                <a id="persona-download" download style="display:block;">Download Persona</a>
-            </div>
-            <div class="result-image-container">
-                <img id="bird-match" alt="Bird Match">
-                <a id="match-download" download style="display:block;">Download Match</a>
-            </div>
+<div id="result-container" style="display: none; text-align: center;">
+    <h1>What Bird Are U?</h1>
+    <p>Do share ur results #langxichim</p>
+    <img src="logo.png" alt="Lang Xichim Logo" style="width: 100px; height: auto; margin-bottom: 20px;">
+
+    <h2>Your Results</h2>
+
+    <!-- Bird Persona and Bird Match Photos Side-by-Side with Download Buttons -->
+    <div id="result" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+        <div class="result-image-container">
+            <canvas id="persona-canvas" width="250" height="250"></canvas>
+            <a id="persona-download" download="bird-persona.png" style="display:block; margin-top: 10px;">Download Persona</a>
+        </div>
+        <div class="result-image-container">
+            <canvas id="match-canvas" width="250" height="250"></canvas>
+            <a id="match-download" download="bird-match.png" style="display:block; margin-top: 10px;">Download Match</a>
         </div>
     </div>
+
+    <!-- Credits and Contact Information -->
+    <p>Created by Leonard for @langxichim</p>
+    <p>Socials: 
+        <a href="https://facebook.com/langxichim" target="_blank"><img src="fb_icon.png" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;"></a>
+        <a href="https://instagram.com/langxichim" target="_blank"><img src="ig_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;"></a>
+        <a href="https://tiktok.com/@langxichim" target="_blank"><img src="tiktok_icon.png" alt="TikTok" style="width: 24px; height: 24px; margin: 0 5px;"></a>
+    </p>
+    <p>Contacts: chirpy@langxichim.com | leonardvuong.work@gmail.com</p>
+
+    <!-- Explore Button -->
+    <button onclick="window.location.href='https://langxichim.com';" style="margin: 20px 0; padding: 12px 30px; font-size: 18px; background-color: var(--primary); color: var(--text); border: none; border-radius: 5px; cursor: pointer;">
+        Explore
+    </button>
+
+    <p style="font-size: 0.9rem;">Ⓒ 2024 Làng Xì Chim</p>
+</div>
+
 
     <script src="birdpersona.js"></script>
 </body>
