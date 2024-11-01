@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('q-current').textContent = `Q${currentQuestionIndex + 1}`;
         questionElement.textContent = currentQuestion.question;
-        questionImage.src = `image_q${currentQuestionIndex + 1}.jpg`; // Load image for current question
+        questionImage.src = `image_q${currentQuestionIndex + 1}.jpg`;
 
-        choicesContainer.innerHTML = ''; // Clear previous choices
+        choicesContainer.innerHTML = '';
         currentQuestion.choices.forEach((choice, index) => {
             const button = document.createElement('button');
             button.textContent = choice;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('name-entry').style.display = 'block';
     }
 
-    // Check and proceed only if a name is entered
+    // Proceed only if a name is entered
     document.getElementById('submit-name').addEventListener('click', () => {
         const testName = document.getElementById('test-taker-name').value.trim();
         if (testName) {
@@ -77,19 +77,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const personaImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-persona-${topResult}.png`;
         const matchImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-match-${birdMatch}.png`;
 
-        // Display images in the result container
-        document.getElementById('bird-persona').src = personaImagePath;
-        document.getElementById('bird-match').src = matchImagePath;
+        // Canvas rendering for persona and match images
+        const personaCanvas = document.getElementById('persona-canvas').getContext('2d');
+        const matchCanvas = document.getElementById('match-canvas').getContext('2d');
+        const personaImage = new Image();
+        const matchImage = new Image();
 
-        document.getElementById('persona-download').href = personaImagePath;
-        document.getElementById('match-download').href = matchImagePath;
+        personaImage.src = personaImagePath;
+        matchImage.src = matchImagePath;
 
-        // Display the result container and hide others
+        personaImage.onload = function () {
+            personaCanvas.drawImage(personaImage, 0, 0, 250, 250);
+            document.getElementById('persona-download').href = document.getElementById('persona-canvas').toDataURL();
+        };
+
+        matchImage.onload = function () {
+            matchCanvas.drawImage(matchImage, 0, 0, 250, 250);
+            document.getElementById('match-download').href = document.getElementById('match-canvas').toDataURL();
+        };
+
+        // Display result container and hide others
         document.getElementById('question-container').style.display = 'none';
         document.getElementById('name-entry').style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
     }
 
+    // Language selection handlers
     document.querySelectorAll('.language-button').forEach(button => {
         button.addEventListener('click', (event) => {
             selectedLanguage = event.target.dataset.language;
