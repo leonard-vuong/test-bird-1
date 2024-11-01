@@ -21,10 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const choicesContainer = document.getElementById('choices');
         const questionImage = document.getElementById('question-image');
 
-        // Update question number display
         document.getElementById('q-current').textContent = `Q${currentQuestionIndex + 1}`;
-
-        // Update question text and image
         questionElement.textContent = currentQuestion.question;
         questionImage.src = `image_q${currentQuestionIndex + 1}.jpg`; // Load image for current question
 
@@ -33,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = document.createElement('button');
             button.textContent = choice;
             button.classList.add('choices');
-            if (index === 0) button.classList.add('selected'); // Auto-select first choice
+            if (index === 0) button.classList.add('selected');
             button.addEventListener('click', () => handleChoiceClick(index, button));
             choicesContainer.appendChild(button);
         });
@@ -62,26 +59,32 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('name-entry').style.display = 'block';
     }
 
+    // Check and proceed only if a name is entered
     document.getElementById('submit-name').addEventListener('click', () => {
         const testName = document.getElementById('test-taker-name').value.trim();
         if (testName) {
             displayResult(testName);
+        } else {
+            alert("Please enter your name to proceed.");
         }
     });
 
     function displayResult(testTakerName) {
-        const topResult = "weaver"; // Placeholder for result calculation
-        const birdMatch = "parakeet"; // Placeholder for match
+        // Example placeholders for results
+        const topResult = "weaver"; // This should be dynamic based on quiz scores
+        const birdMatch = "parakeet"; // Placeholder for match calculation
 
         const personaImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-persona-${topResult}.png`;
         const matchImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-match-${birdMatch}.png`;
 
+        // Display images in the result container
         document.getElementById('bird-persona').src = personaImagePath;
         document.getElementById('bird-match').src = matchImagePath;
 
         document.getElementById('persona-download').href = personaImagePath;
         document.getElementById('match-download').href = matchImagePath;
 
+        // Display the result container and hide others
         document.getElementById('question-container').style.display = 'none';
         document.getElementById('name-entry').style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
