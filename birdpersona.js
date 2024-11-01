@@ -78,7 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
             ctx.font = '30px Arial';
             ctx.fillStyle = 'black';
-            ctx.fillText(overlayText, 50, canvas.height - 50);
+
+            // Position the text 50 pixels from the right and 355 pixels from the top
+            const xPosition = canvas.width - 50;
+            const yPosition = 355;
+            ctx.textAlign = 'right';
+            ctx.fillText(overlayText, xPosition, yPosition);
 
             const downloadLink = document.getElementById(`${canvasId}-download`);
             downloadLink.href = canvas.toDataURL();
