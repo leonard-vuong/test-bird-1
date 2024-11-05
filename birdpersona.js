@@ -107,36 +107,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const personaImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-persona-${topResult}.png`;
         const matchImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-match-${birdMatch}.png`;
 
-        overlayTextOnCanvas('persona-canvas', personaImagePath, `name: ${testTakerName}`);
-        overlayTextOnCanvas('match-canvas', matchImagePath, `${testTakerName}'s match`);
+        overlayTextOnCanvas('persona-canvas', personaImagePath, `name: ${testTakerName}`, 'persona-download');
+        overlayTextOnCanvas('match-canvas', matchImagePath, `${testTakerName}'s match`, 'match-download');
 
         document.getElementById('question-container').style.display = 'none';
         document.getElementById('name-entry').style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
     }
 
-    function overlayTextOnCanvas(canvasId, imagePath, overlayText) {
-    const canvas = document.getElementById(canvasId);
-    const ctx = canvas.getContext('2d');
-    const image = new Image();
+    function overlayTextOnCanvas(canvasId, imagePath, overlayText, downloadId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        const image = new Image();
 
-    image.src = imagePath;
-    image.onload = function () {
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        ctx.font = '30px Arial';
-        ctx.fillStyle = 'black';
+        image.src = imagePath;
+        image.onload = function () {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'black';
 
-        // Position text overlay in the bottom-right
-        const xPosition = canvas.width - 50;
-        const yPosition = 355;
-        ctx.textAlign = 'right';
-        ctx.fillText(overlayText, xPosition, yPosition);
+            // Position text overlay in the bottom-right
+            const xPosition = canvas.width - 50;
+            const yPosition = 355;
+            ctx.textAlign = 'right';
+            ctx.fillText(overlayText, xPosition, yPosition);
 
-        // Set the download link with the canvas data URL after drawing
-        const downloadLink = document.getElementById(`${canvasId}-download`);
-        downloadLink.href = canvas.toDataURL('image/png');
-    };
-}
+            // Set the download link with the canvas data URL after drawing
+            const downloadLink = document.getElementById(downloadId);
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.download = `${canvasId}.png`; // Set filename
+        };
+    }
 
     document.querySelectorAll('.language-button').forEach(button => {
         button.addEventListener('click', (event) => {
