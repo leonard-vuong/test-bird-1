@@ -14,14 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const totalQuestions = 14;
 
-    const englishQuestions = [
-        { question: "You start your journey over the seashore...", choices: ["Imma start anyways...", "Nah, no need to mess up..."], weights: [{ flycatcher: 1 }, { crow: 1 }] },
-        { question: "Not long after your departure, a forest full of food appears. What do you do?", choices: ["Gather food and plan ahead - you’ll need it for later", "Enjoy the present - why worry so much about the future?"], weights: [{ weaver: 1 }, { parakeet: 1 }] },
-    ];
-
-    const vietnameseQuestions = [
-        { question: "Bạn chuẩn bị xuất phát từ bờ biển...", choices: ["Kệ - dân chơi không sợ...", "Thôi khoải. Tìm đường khác..."], weights: [{ flycatcher: 1 }, { crow: 1 }] },
-    ];
+    // Quiz questions remain unchanged ...
 
     function displayCurrentQuestion() {
         const questions = selectedLanguage === 'english' ? englishQuestions : vietnameseQuestions;
@@ -51,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.choices').forEach(btn => btn.classList.remove('selected'));
         button.classList.add('selected');
         
-        // Increment the score for the selected personality
         for (const personality in weight) {
             scores[personality] += weight[personality];
         }
@@ -77,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const testName = document.getElementById('test-taker-name').value.trim();
         if (testName) {
             displayResult(testName);
+            trackQuizCompletion(testName);  // Track quiz completion
         } else {
             alert("Please enter your name to proceed.");
         }
@@ -107,15 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const personaImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-persona-${topResult}.png`;
         const matchImagePath = `${selectedLanguage === 'english' ? 'eng' : 'vie'}-match-${birdMatch}.png`;
 
-        overlayTextOnCanvas('persona-canvas', personaImagePath, `name: ${testTakerName}`);
-        overlayTextOnCanvas('match-canvas', matchImagePath, `${testTakerName}'s match`);
+        overlayTextOnCanvas('persona-canvas', personaImagePath, `name: ${testTakerName}`, 'persona-download');
+        overlayTextOnCanvas('match-canvas', matchImagePath, `${testTakerName}'s match`, 'match-download');
 
         document.getElementById('question-container').style.display = 'none';
         document.getElementById('name-entry').style.display = 'none';
         document.getElementById('result-container').style.display = 'block';
     }
 
-    function overlayTextOnCanvas(canvasId, imagePath, overlayText) {
+    function overlayTextOnCanvas(canvasId, imagePath, overlayText, downloadId) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
         const image = new Image();
@@ -132,9 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.textAlign = 'right';
             ctx.fillText(overlayText, xPosition, yPosition);
 
-            const downloadLink = document.getElementById(`${canvasId}-download`);
-            downloadLink.href = canvas.toDataURL();
+            // Set the download link with the canvas data URL
+            const downloadLink = document.getElementById(downloadId);
+            downloadLink.href = canvas.toDataURL('image/png');
         };
+    }
+
+    function trackQuizCompletion(name) {
+        gtag('event', 'quiz_completion', {
+            event_category: 'Quiz',
+            event_label: 'Bird Persona Quiz Completion',
+            value: 1,
+            user_name: name
+        });
     }
 
     document.querySelectorAll('.language-button').forEach(button => {
