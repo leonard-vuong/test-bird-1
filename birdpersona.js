@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         image.src = imagePath;
         image.onload = function () {
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-            ctx.font = '30px Arial';
+            ctx.font = '30px Manrope';
             ctx.fillStyle = 'black';
 
             // Position text overlay in the bottom-right
